@@ -66,20 +66,19 @@ class TasksViewController: UITableViewController {
             showAlert(with: task) {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
+            isDone(true)
         }
         
-        let doneAction = indexPath.section == 0
-            ? UIContextualAction(style: .normal, title: "Done") { [unowned self] _, _, isDone in
-                self.storageManager.done(task)
-                tableView.reloadData()
-            }
-            : UIContextualAction(style: .normal, title: "UnDone") { [unowned self] _, _, isDone in
-                self.storageManager.done(task)
-                tableView.reloadData()
-            }
+        let doneAction = UIContextualAction(style: .normal, title: "Done") { [unowned self] _, _, isDone in
+            self.storageManager.update(task)
+            tableView.reloadSections([0,1], with: .automatic)
+            isDone(true)
+        }
         
         editAction.backgroundColor = .orange
         doneAction.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        doneAction.title = indexPath.section == 0 ? "Done" : "unDone"
+        
         
         return UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
     }
