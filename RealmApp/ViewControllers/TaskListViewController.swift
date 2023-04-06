@@ -9,9 +9,8 @@
 import UIKit
 import RealmSwift
 
-
 final class TaskListViewController: UITableViewController {
-
+    
     private var taskLists: Results<TaskList>!
     private let storageManager = StorageManager.shared
     
@@ -47,11 +46,11 @@ final class TaskListViewController: UITableViewController {
         
         content.text = taskList.title
         content.secondaryText = currentTasks.count == 0 && taskList.tasks.count > 0
-            ? nil
-            : currentTasks.count.formatted()
+        ? nil
+        : currentTasks.count.formatted()
         cell.accessoryType = currentTasks.count == 0 && taskList.tasks.count > 0
-            ? .checkmark
-            : .none
+        ? .checkmark
+        : .none
         
         cell.contentConfiguration = content
         return cell
@@ -92,7 +91,7 @@ final class TaskListViewController: UITableViewController {
         let taskList = taskLists[indexPath.row]
         tasksVC.taskList = taskList
     }
-
+    
     @IBAction func sortingList(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:

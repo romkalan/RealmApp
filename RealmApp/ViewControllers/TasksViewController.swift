@@ -9,14 +9,14 @@
 import UIKit
 import RealmSwift
 
-class TasksViewController: UITableViewController {
+final class TasksViewController: UITableViewController {
     
     var taskList: TaskList!
-        
+    
     private var currentTasks: Results<Task>!
     private var completedTasks: Results<Task>!
     private let storageManager = StorageManager.shared
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = taskList.title
@@ -74,7 +74,7 @@ class TasksViewController: UITableViewController {
             tableView.reloadSections([0,1], with: .automatic)
             isDone(true)
         }
-            
+        
         editAction.backgroundColor = .orange
         doneAction.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         doneAction.title = indexPath.section == 0 ? "Done" : "unDone"
@@ -86,7 +86,7 @@ class TasksViewController: UITableViewController {
     @objc private func addButtonPressed() {
         showAlert()
     }
-
+    
 }
 
 extension TasksViewController {
