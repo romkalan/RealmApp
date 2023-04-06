@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+
 final class TaskListViewController: UITableViewController {
 
     private var taskLists: Results<TaskList>!
@@ -42,13 +43,15 @@ final class TaskListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskListCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
         let taskList = taskLists[indexPath.row]
-        content.text = taskList.title
+        let currentTasks = taskList.tasks.filter { !$0.isComplete }
         
-        if taskList.tasks.contains(where: { $0.isComplete == false } ) {
-            content.secondaryText = taskList.tasks.count.formatted()
-        } else {
-            cell.accessoryType = .checkmark
-        }
+        content.text = taskList.title
+        content.secondaryText = currentTasks.count == 0 && taskList.tasks.count > 0
+            ? nil
+            : currentTasks.count.formatted()
+        cell.accessoryType = currentTasks.count == 0 && taskList.tasks.count > 0
+            ? .checkmark
+            : .none
         
         cell.contentConfiguration = content
         return cell

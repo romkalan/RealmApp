@@ -12,7 +12,7 @@ import RealmSwift
 class TasksViewController: UITableViewController {
     
     var taskList: TaskList!
-    
+        
     private var currentTasks: Results<Task>!
     private var completedTasks: Results<Task>!
     private let storageManager = StorageManager.shared
