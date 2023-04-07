@@ -46,11 +46,11 @@ final class TaskListViewController: UITableViewController {
         
         content.text = taskList.title
         content.secondaryText = currentTasks.count == 0 && taskList.tasks.count > 0
-        ? nil
-        : currentTasks.count.formatted()
+            ? nil
+            : currentTasks.count.formatted()
         cell.accessoryType = currentTasks.count == 0 && taskList.tasks.count > 0
-        ? .checkmark
-        : .none
+            ? .checkmark
+            : .none
         
         cell.contentConfiguration = content
         return cell
